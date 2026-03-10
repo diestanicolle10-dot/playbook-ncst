@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NCST Dasma — Digital Growth Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --ink:#0a1020;--surface:#111827;--surface2:#1a2235;
+    --border:#1f2d45;--border2:rgba(26,86,219,0.3);
+    --blue:#1a56db;--blue-light:#3b82f6;--blue-pale:rgba(26,86,219,0.10);
+    --gold:#f59e0b;--gold-light:#fbbf24;--gold-pale:rgba(245,158,11,0.10);
+    --green:#10b981;--green-pale:rgba(16,185,129,0.08);--green-border:rgba(16,185,129,0.25);
+    --text:#f0f6ff;--muted:#7a8faa;--soft:#93c5fd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:var(--text);line-height:1.7;}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(10,16,32,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1rem 0;}
+  .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;}
+  .brand-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--blue-light));display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+  .brand-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text);}
+  .brand-sub{font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);font-size:.83rem;font-weight:500;text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+
+  /* HERO */
+  .hero{padding:6rem 2rem 5rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#080e1c 0%,#111827 55%,#08101e 100%);border-bottom:1px solid var(--border);}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(26,86,219,0.09) 0%,transparent 70%);pointer-events:none;}
+  .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--gold),var(--green),transparent);}
+  .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;}
+  .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,0.10);border:1px solid var(--green-border);padding:.3rem .9rem;border-radius:999px;font-size:.7rem;font-weight:600;color:#6ee7b7;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:800;line-height:1.08;margin-bottom:1.25rem;letter-spacing:-.02em;}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{font-size:1rem;color:var(--muted);max-width:520px;font-weight:300;line-height:1.8;margin-bottom:2rem;}
+  .hero-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--blue);color:#fff;font-family:'Playfair Display',serif;font-weight:700;font-size:.9rem;padding:.9rem 2rem;border-radius:10px;text-decoration:none;}
+  .hero-cta:hover{background:var(--blue-light);}
+  .stat-stack{display:flex;flex-direction:column;gap:1rem;}
+  .stat-card{padding:1rem 1.25rem;min-width:195px;border-radius:0 12px 12px 0;}
+  .stat-card.blue{background:var(--blue-pale);border:1px solid var(--border2);border-left:3px solid var(--blue);}
+  .stat-card.gold{background:var(--gold-pale);border:1px solid rgba(245,158,11,0.25);border-left:3px solid var(--gold);}
+  .stat-card.green{background:var(--green-pale);border:1px solid var(--green-border);border-left:3px solid var(--green);}
+  .stat-num{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1;}
+  .stat-card.blue .stat-num{color:var(--blue-light);}
+  .stat-card.gold .stat-num{color:var(--gold);}
+  .stat-card.green .stat-num{color:#6ee7b7;}
+  .stat-label{font-size:.74rem;color:var(--muted);margin-top:.25rem;}
+
+  /* PLAN BANNERS */
+  .plan-banners{border-bottom:1px solid var(--border);}
+  .plan-inner{max-width:1100px;margin:0 auto;padding:0 2rem;}
+  .plan-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+  .plan-cell{padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:.75rem;font-size:.83rem;line-height:1.55;}
+  .plan-cell.starter{background:rgba(16,185,129,0.05);}
+  .plan-cell.impl{background:var(--gold-pale);}
+
+  /* JUMP BAR */
+  .jump-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;}
+  .jump-inner{max-width:1100px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+  .jump-inner::-webkit-scrollbar{display:none;}
+  .jump-link{padding:.9rem 1.3rem;color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+  .jump-link:hover{color:var(--text);border-color:var(--blue-light);}
+
+  /* SECTIONS */
+  .section-wrap{max-width:1100px;margin:0 auto;padding:5rem 2rem;}
+  .section-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--blue-light);margin-bottom:.6rem;}
+  .section-label.gold{color:var(--gold);}
+  .section-label.green{color:#6ee7b7;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.65rem;}
+  .section-sub{font-size:.9rem;color:var(--muted);max-width:580px;line-height:1.75;margin-bottom:2.5rem;}
+  .section-divider{border:none;border-top:1px solid var(--border);max-width:1100px;margin:0 auto;}
+
+  /* CHALLENGE / SOLUTION */
+  .cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-bottom:2rem;}
+  .cs-col{background:var(--surface);padding:2rem;}
+  .cs-col h3{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.25rem;}
+  .cs-col.challenge h3{color:var(--muted);}
+  .cs-col.solution h3{color:var(--blue-light);}
+  .cs-item{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.84rem;line-height:1.6;}
+  .cs-item:last-child{border-bottom:none;}
+  .cs-item .ico{flex-shrink:0;margin-top:1px;}
+  .cs-item.challenge-item{color:var(--muted);}
+  .cs-item.solution-item{color:var(--soft);}
+
+  /* SETUP */
+  .cta-card{background:linear-gradient(135deg,rgba(26,86,219,0.12),rgba(17,24,39,0.7));border:1px solid var(--border2);border-radius:16px;padding:2rem 2.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;}
+  .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--green);color:#052e16;font-family:'Playfair Display',serif;font-weight:700;font-size:.92rem;padding:.9rem 2rem;border-radius:10px;text-decoration:none;white-space:nowrap;}
+  .cta-btn:hover{opacity:.88;}
+  .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .setup-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.4rem;display:flex;gap:1rem;align-items:flex-start;}
+  .setup-num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;}
+  .setup-card h4{font-size:.9rem;font-weight:600;margin-bottom:.3rem;}
+  .setup-card p{font-size:.81rem;color:var(--muted);line-height:1.6;}
+  .tip-box{margin-top:1.25rem;background:var(--green-pale);border:1px solid var(--green-border);border-radius:10px;padding:1rem 1.25rem;font-size:.82rem;color:#6ee7b7;display:flex;gap:.7rem;align-items:flex-start;}
+
+  /* USE CASE CARDS */
+  .uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
+  .uc-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;transition:border-color .2s,transform .15s;}
+  .uc-card:hover{border-color:var(--border2);transform:translateY(-3px);}
+  .uc-card-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem;}
+  .uc-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;background:var(--blue-pale);border:1px solid var(--border2);}
+  .uc-ico.gold{background:var(--gold-pale);border-color:rgba(245,158,11,0.3);}
+  .uc-ico.green{background:var(--green-pale);border-color:var(--green-border);}
+  .uc-card h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;}
+  .uc-card p{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;}
+  .exp-list{display:flex;flex-direction:column;gap:.45rem;}
+  .exp-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.8rem;color:var(--soft);line-height:1.5;}
+  .exp-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-light);flex-shrink:0;margin-top:6px;}
+  .exp-dot.gold{background:var(--gold);}
+  .exp-dot.green{background:var(--green);}
+
+  /* OUTCOME GRID */
+  .outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+  .outcome-item{text-align:center;padding:1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;}
+  .outcome-icon{font-size:1.4rem;margin-bottom:.4rem;}
+  .outcome-title{font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:.2rem;}
+  .outcome-desc{font-size:.73rem;color:var(--muted);line-height:1.5;}
+
+  /* SAMPLE EMAIL */
+  .sample-email{margin-top:1.25rem;background:var(--ink);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .email-bar{padding:.75rem 1.25rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;}
+  .email-dot{width:10px;height:10px;border-radius:50%;}
+  .email-bar-label{margin-left:auto;font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+  .email-content{padding:1.5rem;font-size:.82rem;line-height:1.8;}
+  .email-field{display:flex;gap:.5rem;margin-bottom:.3rem;font-size:.78rem;}
+  .email-field-label{color:var(--muted);min-width:50px;flex-shrink:0;}
+  .email-field-val{color:var(--text);}
+  .email-divider{border:none;border-top:1px solid var(--border);margin:.85rem 0;}
+  .email-body-text{color:var(--soft);}
+  .email-btn{display:inline-block;margin-top:1rem;font-weight:700;font-size:.78rem;padding:.5rem 1.1rem;border-radius:6px;background:var(--blue);color:#fff;}
+  .email-btn.gold{background:var(--gold);color:#0a1020;}
+  .email-btn.green{background:var(--green);color:#052e16;}
+
+  /* ROADMAP */
+  .roadmap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;}
+  .rm{background:var(--surface);padding:1.6rem 1.3rem;}
+  .rm h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:1rem;}
+  .rm-item{font-size:.79rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:.45rem;align-items:flex-start;line-height:1.5;}
+  .rm-item:last-child{border-bottom:none;}
+  .rm-check{color:var(--green);flex-shrink:0;}
+
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;}.stat-stack{display:none;}
+    .cs-grid,.uc-grid,.setup-grid{grid-template-columns:1fr;}
+    .plan-row{grid-template-columns:1fr;}
+    .roadmap-grid{grid-template-columns:1fr 1fr;}
+    .outcome-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:560px){.roadmap-grid,.outcome-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <div class="brand-icon">🎓</div>
+      <div>
+        <div class="brand-name">NCST Dasmariñas</div>
+        <div class="brand-sub">Digital Growth Proposal</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#challenges">Challenges</a></li>
+      <li><a href="#setup">Get Started</a></li>
+      <li><a href="#uc1">Enrollment</a></li>
+      <li><a href="#uc2">Social Media</a></li>
+      <li><a href="#uc3">Reputation</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">🎓 Prepared exclusively for NCST Dasmariñas · Cavite, Philippines</div>
+      <h1>More Enrollees.<br/>Stronger <span class="accent">Reputation.</span><br/>Less Manual Work.</h1>
+      <p>A complete digital system for National College of Science and Technology — Dasmariñas. Automate enrollment inquiries, grow your social media presence, and build NCST's reputation online — all running quietly in the background while your team focuses on students.</p>
+      <a href="#uc1" class="hero-cta">See How It Works →</a>
+    </div>
+    <div class="stat-stack">
+      <div class="stat-card blue">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Inquiries that fall through the cracks</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Days to guide an inquiry to enrollment</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Admissions answered automatically</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PLAN BANNERS -->
+<div class="plan-banners">
+  <div class="plan-inner">
+    <div class="plan-row">
+      <div class="plan-cell starter">
+        <span style="font-size:1rem;flex-shrink:0;margin-top:2px;">✅</span>
+        <div><span style="font-weight:700;color:#6ee7b7;">Starter Plan Only ($97/mo)</span><span style="color:var(--muted);"> — Every feature in this proposal is included in the base plan. No SMS fees, no phone numbers, no paid add-ons needed.</span></div>
+      </div>
+      <div class="plan-cell impl">
+        <span style="font-size:1rem;flex-shrink:0;margin-top:2px;">✅</span>
+        <div><span style="font-weight:700;color:var(--gold);">Implementation Plan ($499/mo)</span><span style="color:var(--muted);"> — A dedicated AI Operator will implement the full Custom Automation Playbook for NCST within 4 weeks.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="jump-bar">
+  <div class="jump-inner">
+    <a href="#challenges" class="jump-link">Challenges</a>
+    <a href="#setup" class="jump-link">Get Started</a>
+    <a href="#uc1" class="jump-link">🎓 Enrollment & Inquiries</a>
+    <a href="#uc1-inquiry" class="jump-link">Instant Response</a>
+    <a href="#uc1-nurture" class="jump-link">7-Day Nurture</a>
+    <a href="#uc1-tour" class="jump-link">Campus Tour Booking</a>
+    <a href="#uc2" class="jump-link">📱 Social Media</a>
+    <a href="#uc3" class="jump-link">⭐ Reputation</a>
+    <a href="#roadmap" class="jump-link">Roadmap</a>
+  </div>
+</div>
+
+<!-- CHALLENGES -->
+<div class="section-wrap" id="challenges" style="scroll-margin-top:80px;">
+  <div class="section-label">The Challenge</div>
+  <h2 class="section-title">What's Holding NCST Back Right Now</h2>
+  <p class="section-sub">NCST Dasmariñas has built a solid academic reputation in Cavite. But every enrollment season, the same gaps cost real applicants — and fixing them doesn't require more staff, just smarter systems.</p>
+
+  <div class="cs-grid">
+    <div class="cs-col challenge">
+      <h3>⚠ Pain Points</h3>
+      <div class="cs-item challenge-item"><span class="ico">💬</span><span>Prospective students and parents message NCST on Facebook or Instagram — and wait hours or days for a reply. By then, they've already enrolled somewhere else.</span></div>
+      <div class="cs-item challenge-item"><span class="ico">📋</span><span>There is no structured follow-up after an inquiry. Students who expressed interest but didn't immediately enroll are never contacted again — leading to preventable dropout from the funnel.</span></div>
+      <div class="cs-item challenge-item"><span class="ico">📅</span><span>Campus tour bookings are handled manually by phone or walk-in — admissions staff spend hours coordinating visits that could be self-scheduled in seconds.</span></div>
+      <div class="cs-item challenge-item"><span class="ico">📱</span><span>NCST's social media is inconsistent — posts go up sporadically when someone remembers, and the accounts go quiet during semester breaks, exactly when future applicants are deciding where to enroll.</span></div>
+      <div class="cs-item challenge-item"><span class="ico">⭐</span><span>NCST has happy enrolled students, but very few Google reviews — so future applicants searching online see a thin reputation compared to competitors with a strong review presence.</span></div>
+    </div>
+    <div class="cs-col solution">
+      <h3>✦ With This System</h3>
+      <div class="cs-item solution-item"><span class="ico">✅</span><span>Every Facebook DM, Instagram message, and website inquiry receives an instant, personalised response — 24 hours a day, 7 days a week — so no prospective student ever waits.</span></div>
+      <div class="cs-item solution-item"><span class="ico">✅</span><span>Every inquirer enters a 7-day email sequence that guides them step by step — requirements, campus tour, deadlines, student stories — nudging them toward enrollment automatically.</span></div>
+      <div class="cs-item solution-item"><span class="ico">✅</span><span>A self-booking calendar lets prospective students pick their campus visit slot online, any time of day — with an automatic confirmation and two reminder emails sent with no staff involvement.</span></div>
+      <div class="cs-item solution-item"><span class="ico">✅</span><span>An entire semester of social content is planned and scheduled in one session — posts go out daily across Facebook, Instagram, and Google Business Profile, consistently, without anyone manually posting.</span></div>
+      <div class="cs-item solution-item"><span class="ico">✅</span><span>Every newly enrolled student receives an automatic review request email — and every positive review is reposted to NCST's social media, compounding the school's online reputation every term.</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- GET STARTED -->
+<div class="section-wrap" id="setup" style="scroll-margin-top:80px;padding-top:4rem;">
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Up and Running in Four Steps</h2>
+  <p class="section-sub">Everything runs on one platform. No hardware, no complex integrations, no technical background required from the admissions team.</p>
+
+  <div class="cta-card">
+    <div style="flex:1;min-width:220px;">
+      <div style="font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#6ee7b7;margin-bottom:.5rem;">Step 1 — Register Free</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.4rem;line-height:1.2;">Start Your 30-Day Free Trial</div>
+      <p style="font-size:.83rem;color:var(--muted);">No credit card pressure — explore the full platform free for 30 days before committing.</p>
+    </div>
+    <div style="flex-shrink:0;text-align:center;">
+      <a href="https://www.gohighlevel.com/siliconvalleyhq" target="_blank" class="cta-btn">🚀 Register Free Trial</a>
+      <div style="font-size:.7rem;color:var(--muted);margin-top:.55rem;">gohighlevel.com/siliconvalleyhq</div>
+    </div>
+  </div>
+
+  <div class="setup-grid">
+    <div class="setup-card">
+      <div class="setup-num">1</div>
+      <div>
+        <h4>Visit the Registration Link</h4>
+        <p>Go to <a href="https://www.gohighlevel.com/siliconvalleyhq" target="_blank" style="color:var(--soft);text-decoration:none;">gohighlevel.com/siliconvalleyhq</a> and click "Start 30-Day Free Trial."</p>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-num">2</div>
+      <div>
+        <h4>Fill in NCST's Details</h4>
+        <p>Business name: <strong style="color:var(--text);">National College of Science and Technology – Dasmariñas</strong>. Industry: Education. Use the registrar or admin email.</p>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-num">3</div>
+      <div>
+        <h4>Select the Starter Plan</h4>
+        <p>Choose <strong style="color:var(--text);">Starter Plan ($97/mo)</strong> — all three systems in this proposal run on this single plan with no upgrades needed.</p>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-num">4</div>
+      <div>
+        <h4>Add Our Team as Admin</h4>
+        <p>If you chose the <strong style="color:var(--gold);">Implementation Plan</strong>, add <strong style="color:var(--text);">sales@siliconvalleyhq.com</strong> as Account Admin — our AI Operator builds everything in 4 weeks.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span style="flex-shrink:0;margin-top:1px;">💡</span>
+    <span>Once access is granted, our AI Operator handles the full build — pipelines, automations, social calendar, booking calendar, and review requests — all ready before the next enrollment season. No technical work required from the NCST team.</span>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- ============================== -->
+<!-- UC1: ENROLLMENT & INQUIRIES    -->
+<!-- ============================== -->
+<div class="section-wrap" id="uc1" style="scroll-margin-top:80px;padding-bottom:2rem;">
+  <div class="section-label">Use Case 1</div>
+  <h2 class="section-title">Enrollment & Inquiry Management</h2>
+  <p class="section-sub">From the moment a prospective student sends their first message to the moment they walk through the door as an enrolled student — every step is guided, followed up, and tracked automatically.</p>
+
+  <div class="outcome-grid">
+    <div class="outcome-item">
+      <div class="outcome-icon">💬</div>
+      <div class="outcome-title">Instant Reply to Every Inquiry</div>
+      <div class="outcome-desc">Facebook DMs, Instagram messages, and website forms are answered instantly — 24/7, with no staff needed.</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-icon">📧</div>
+      <div class="outcome-title">7-Day Nurture Sequence</div>
+      <div class="outcome-desc">A week of carefully timed emails guides each inquirer through requirements, campus tour, deadlines, and enrollment.</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-icon">📅</div>
+      <div class="outcome-title">Self-Book Campus Visits</div>
+      <div class="outcome-desc">Prospective students book their own tour slot online — confirmed automatically, with two reminder emails sent before the visit.</div>
+    </div>
+  </div>
+</div>
+
+<!-- UC1-S1: INSTANT RESPONSE -->
+<div class="section-wrap" id="uc1-inquiry" style="scroll-margin-top:80px;padding-top:1rem;padding-bottom:2rem;">
+  <div class="section-label">System 1A</div>
+  <h2 class="section-title" style="font-size:1.4rem;">Instant Inquiry Response</h2>
+  <p class="section-sub">The first reply is the most important. Students who get a response within minutes are far more likely to continue the process — those who wait often don't come back.</p>
+
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico">📬</div><h3>What the Student Experiences</h3></div>
+      <p>A Grade 12 student messages NCST on Facebook at 9PM asking about IT enrollment requirements. Within seconds, they receive a personal, helpful reply — with the full requirements list, the enrollment link, and an invitation to book a campus tour.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot"></span><span>Gets an immediate, helpful response — not a "we'll get back to you" message</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Feels the school is professional, organised, and genuinely responsive</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Their details are captured — they automatically receive the 7-day follow-up sequence</span></div>
+      </div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico">🗂️</div><h3>What the Admissions Team Gains</h3></div>
+      <p>Every inquiry — from Facebook, Instagram, the website, or the campus tour form — lands in one unified inbox. Staff see all conversations in one place, with each contact's program interest and inquiry date already recorded.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot"></span><span>No inquiry is missed, even on weekends and holidays</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Every lead is tagged by program — IT, Business, Education, Tourism, Criminology</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Staff can focus on personal conversations, not repetitive first replies</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-email">
+    <div class="email-bar">
+      <div class="email-dot" style="background:#ef4444;"></div>
+      <div class="email-dot" style="background:#f59e0b;margin-left:4px;"></div>
+      <div class="email-dot" style="background:#22c55e;margin-left:4px;"></div>
+      <span class="email-bar-label">Sample Email — Instant Welcome Response</span>
+    </div>
+    <div class="email-content">
+      <div class="email-field"><span class="email-field-label">From:</span><span class="email-field-val">NCST Dasmariñas Admissions &lt;admissions@mail.ncstdasma.edu.ph&gt;</span></div>
+      <div class="email-field"><span class="email-field-label">To:</span><span class="email-field-val">Janna</span></div>
+      <div class="email-field"><span class="email-field-label">Subject:</span><span class="email-field-val">🎓 Thank you for your interest in NCST Dasma!</span></div>
+      <hr class="email-divider"/>
+      <div class="email-body-text">Hi Janna!<br/><br/>Thank you so much for reaching out to National College of Science and Technology – Dasmariñas. We're excited you're considering us for your college journey! 🎓<br/><br/>Here's everything you need to get started for SY 2025–2026:<br/><br/>✅ Form 138 (Grade 12 Report Card)<br/>✅ PSA Birth Certificate<br/>✅ Good Moral Character Certificate<br/>✅ 2x2 ID photos (4 copies)<br/><br/>You can also book a free campus visit — just click the link below to choose a date that works for you. We'd love to show you around!<br/><br/>See you soon, Janna. 💙</div>
+      <div class="email-btn">Book My Campus Visit →</div>
+    </div>
+  </div>
+</div>
+
+<!-- UC1-S2: 7-DAY NURTURE -->
+<div class="section-wrap" id="uc1-nurture" style="scroll-margin-top:80px;padding-top:1rem;padding-bottom:2rem;">
+  <div class="section-label">System 1B</div>
+  <h2 class="section-title" style="font-size:1.4rem;">7-Day Enrollment Nurture</h2>
+  <p class="section-sub">Most students need more than one touchpoint before they decide to enroll. This sequence sends the right message at exactly the right time — guiding each inquirer gently from interest to action.</p>
+
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico gold">📅</div><h3>What the Student Experiences</h3></div>
+      <p>Over seven days, the student receives a series of helpful, encouraging emails — each one adding a reason to choose NCST. They never feel chased, just supported through a decision that matters.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Day 1</strong> — A clear, friendly enrollment checklist: exactly what to bring and how to submit</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Day 2</strong> — An invitation to visit campus, with a one-click booking link</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Day 4</strong> — Real student stories and scholarship information</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Day 6</strong> — A friendly enrollment deadline reminder</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Day 7</strong> — A warm final message: "We'd love to have you here"</span></div>
+      </div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico gold">⏹️</div><h3>Smart Enough to Stop</h3></div>
+      <p>The sequence stops automatically the moment a student enrolls — so they never receive a "deadline reminder" email after they've already completed the process. Students who enroll early move straight into the welcome and onboarding track.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot gold"></span><span>No awkward "hurry and enroll" emails sent to students who already have</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span>Enrolled students automatically receive a welcome email and Google review request instead</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span>The admissions team can see exactly where each applicant is in the process at any time</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-email">
+    <div class="email-bar">
+      <div class="email-dot" style="background:#ef4444;"></div>
+      <div class="email-dot" style="background:#f59e0b;margin-left:4px;"></div>
+      <div class="email-dot" style="background:#22c55e;margin-left:4px;"></div>
+      <span class="email-bar-label">Sample Email — Day 6 Deadline Reminder</span>
+    </div>
+    <div class="email-content">
+      <div class="email-field"><span class="email-field-label">From:</span><span class="email-field-val">NCST Dasmariñas Admissions &lt;admissions@mail.ncstdasma.edu.ph&gt;</span></div>
+      <div class="email-field"><span class="email-field-label">To:</span><span class="email-field-val">Marco</span></div>
+      <div class="email-field"><span class="email-field-label">Subject:</span><span class="email-field-val">⏰ Enrollment closes soon, Marco — secure your spot</span></div>
+      <hr class="email-divider"/>
+      <div class="email-body-text">Hi Marco!<br/><br/>Just a friendly heads-up — NCST Dasma's enrollment period for SY 2025–2026 is closing soon, and slots in some programs are filling up quickly.<br/><br/>If you've been thinking about it, now is the time to take the next step. Your requirements list and campus tour booking are ready and waiting — it only takes a few minutes to get started.<br/><br/>We believe you'd thrive here at NCST, and we want to make sure you don't miss your chance. 💙</div>
+      <div class="email-btn">Complete My Enrollment →</div>
+    </div>
+  </div>
+</div>
+
+<!-- UC1-S3: CAMPUS TOUR BOOKING -->
+<div class="section-wrap" id="uc1-tour" style="scroll-margin-top:80px;padding-top:1rem;padding-bottom:3rem;">
+  <div class="section-label">System 1C</div>
+  <h2 class="section-title" style="font-size:1.4rem;">Campus Tour Booking</h2>
+  <p class="section-sub">Prospective students who visit campus are far more likely to enroll. This system makes booking a visit as easy as clicking a link — and handles all the reminders automatically.</p>
+
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico">🏫</div><h3>What the Student Experiences</h3></div>
+      <p>A student clicks the "Book a Campus Visit" link in any email or on the NCST website. They see available dates and times, pick one, and instantly receive a confirmation email with everything they need to know.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot"></span><span>Books in under a minute — no calling, no waiting, no back-and-forth</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Receives a confirmation email with NCST's address, what to bring, and what to expect</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Gets a reminder 2 days before and a final reminder with directions the day before the visit</span></div>
+      </div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico">📋</div><h3>What the Admissions Team Gains</h3></div>
+      <p>Campus visit bookings appear automatically on the admissions team's calendar — no manual coordination, no missed bookings. Staff prepare for the right number of visitors on each day without any scheduling back-and-forth.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot"></span><span>Every booked visitor is already in the CRM — tagged and tracked through the enrollment pipeline</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>Post-visit: the student automatically receives a follow-up email encouraging them to complete enrollment</span></div>
+        <div class="exp-item"><span class="exp-dot"></span><span>No-shows receive a gentle "rebook your visit" email — recovering lost campus visit opportunities</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- ============================== -->
+<!-- UC2: SOCIAL MEDIA              -->
+<!-- ============================== -->
+<div class="section-wrap" id="uc2" style="scroll-margin-top:80px;padding-top:4rem;padding-bottom:3rem;">
+  <div class="section-label gold">Use Case 2</div>
+  <h2 class="section-title">Social Media — Always On, Always Consistent</h2>
+  <p class="section-sub">NCST's future students are on Facebook and Instagram right now — comparing schools, reading posts, and forming opinions. A consistent, well-planned social presence builds trust before a student ever sends their first inquiry.</p>
+
+  <div class="outcome-grid">
+    <div class="outcome-item">
+      <div class="outcome-icon">🗓️</div>
+      <div class="outcome-title">One Session, One Month</div>
+      <div class="outcome-desc">Plan and schedule an entire month of posts in one sitting — then let the platform post automatically every day.</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-icon">📲</div>
+      <div class="outcome-title">All Platforms, One Place</div>
+      <div class="outcome-desc">Facebook, Instagram, and Google Business Profile are all managed from a single content calendar — no logging in and out.</div>
+    </div>
+    <div class="outcome-item">
+      <div class="outcome-icon">📊</div>
+      <div class="outcome-title">See What's Working</div>
+      <div class="outcome-desc">Built-in analytics show which posts drove the most engagement and inquiries — so the content gets better every month.</div>
+    </div>
+  </div>
+
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico gold">📅</div><h3>Weekly Content Framework</h3></div>
+      <p>A repeatable weekly posting schedule keeps NCST's pages active and engaging every single day — without requiring anyone to think of new content ideas from scratch each week.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Monday</strong> — Program Spotlight: highlight a course or department</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Tuesday</strong> — Enrollment Update: deadlines, open slots, requirements</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Wednesday</strong> — Student Story: a real testimonial or student feature</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Thursday</strong> — Campus Life: events, clubs, campus photos</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Friday</strong> — Faculty Spotlight: a professor or department feature</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Saturday</strong> — Review Repost: auto-share a Google or Facebook review</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span><strong>Sunday</strong> — Tips & Info: study guides, scholarship info, career insights</span></div>
+      </div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico gold">📌</div><h3>Enrollment Season Amplification</h3></div>
+      <p>During enrollment season, the social calendar automatically intensifies — more frequent deadline reminders, open house promotions, and program-specific content targeting students in Dasmariñas and the wider Cavite area.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot gold"></span><span>Open house events are promoted across all platforms 2 weeks in advance</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span>Scholarship announcements go out to the full contact list simultaneously with social posts</span></div>
+        <div class="exp-item"><span class="exp-dot gold"></span><span>Enrollment countdown posts build urgency in the final week before deadlines close</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- ============================== -->
+<!-- UC3: REPUTATION                -->
+<!-- ============================== -->
+<div class="section-wrap" id="uc3" style="scroll-margin-top:80px;padding-top:4rem;padding-bottom:3rem;">
+  <div class="section-label green">Use Case 3</div>
+  <h2 class="section-title">Reputation — Building Trust Before They Even Inquire</h2>
+  <p class="section-sub">When a family searches for colleges in Dasmariñas, the school with the most visible, authentic student reviews wins their attention. This system builds NCST's Google and Facebook reputation automatically — every enrollment cycle, without anyone asking for reviews manually.</p>
+
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico green">⭐</div><h3>What a New Student Experiences</h3></div>
+      <p>One week after enrolling, a student receives a warm, friendly email from NCST asking if they'd like to share their experience with a Google review. The process takes under a minute — one click, one form, done.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot green"></span><span>Receives the review request at exactly the right moment — after the excitement of enrolling, while the experience is fresh</span></div>
+        <div class="exp-item"><span class="exp-dot green"></span><span>The email makes leaving a review feel easy and appreciated — not like a chore</span></div>
+        <div class="exp-item"><span class="exp-dot green"></span><span>If they don't leave one the first time, a gentle follow-up email goes out 5 days later</span></div>
+      </div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-card-head"><div class="uc-ico green">🔄</div><h3>Reviews Become Social Proof</h3></div>
+      <p>Every new Google or Facebook review is automatically reposted to NCST's social media as a social proof post — turning one positive review into content that future applicants see when they visit the school's pages.</p>
+      <div class="exp-list">
+        <div class="exp-item"><span class="exp-dot green"></span><span>Each review becomes a piece of content — no extra design or posting work needed</span></div>
+        <div class="exp-item"><span class="exp-dot green"></span><span>Every review receives an automatic, personalised reply — so NCST always looks engaged and attentive</span></div>
+        <div class="exp-item"><span class="exp-dot green"></span><span>Over time, NCST's Google rating rises — making the school the obvious first choice when parents search online</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-email">
+    <div class="email-bar">
+      <div class="email-dot" style="background:#ef4444;"></div>
+      <div class="email-dot" style="background:#f59e0b;margin-left:4px;"></div>
+      <div class="email-dot" style="background:#22c55e;margin-left:4px;"></div>
+      <span class="email-bar-label">Sample Email — Google Review Request</span>
+    </div>
+    <div class="email-content">
+      <div class="email-field"><span class="email-field-label">From:</span><span class="email-field-val">NCST Dasmariñas &lt;admissions@mail.ncstdasma.edu.ph&gt;</span></div>
+      <div class="email-field"><span class="email-field-label">To:</span><span class="email-field-val">Rica</span></div>
+      <div class="email-field"><span class="email-field-label">Subject:</span><span class="email-field-val">🙏 Rica, your review would mean the world to us</span></div>
+      <hr class="email-divider"/>
+      <div class="email-body-text">Hi Rica!<br/><br/>Welcome to the NCST Dasma family — we're so glad you're here! 🎓<br/><br/>We know you're just getting started, but if you've had a good experience with our admissions process, a quick Google review would mean the world to us — and help future students like you find NCST.<br/><br/>It only takes 60 seconds, and your words truly make a difference for the next generation of NCST students. 💙</div>
+      <div class="email-btn green">Leave a Google Review →</div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider"/>
+
+<!-- ROADMAP -->
+<div class="section-wrap" id="roadmap" style="scroll-margin-top:80px;padding-bottom:6rem;">
+  <div class="section-label">Implementation</div>
+  <h2 class="section-title">From Agreement to Live in 4 Weeks</h2>
+  <p class="section-sub">Our team builds everything — all three systems — so NCST's admissions team and faculty don't have to touch a single technical setting. Ready before the next enrollment season opens.</p>
+  <div class="roadmap-grid">
+    <div class="rm">
+      <h4>Week 1 — Foundation</h4>
+      <div class="rm-item"><span class="rm-check">✓</span> Account setup & NCST branding</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Email sending domain configured</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Facebook, Instagram, Google Business connected</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Program tags created (IT, BA, Education, Tourism, Criminology)</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Live web chat installed on NCST website</div>
+    </div>
+    <div class="rm">
+      <h4>Week 2 — Enrollment Systems</h4>
+      <div class="rm-item"><span class="rm-check">✓</span> 7-stage enrollment CRM pipeline built</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Instant inquiry auto-reply live</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Campus tour booking calendar active</div>
+      <div class="rm-item"><span class="rm-check">✓</span> 7-day nurture email sequence running</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Open house event RSVP funnel live</div>
+    </div>
+    <div class="rm">
+      <h4>Week 3 — Social & Reputation</h4>
+      <div class="rm-item"><span class="rm-check">✓</span> 30 days of social content scheduled</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Review request workflow activated</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Auto review reposting to social enabled</div>
+      <div class="rm-item"><span class="rm-check">✓</span> AI review reply responses configured</div>
+      <div class="rm-item"><span class="rm-check">✓</span> First social performance report reviewed</div>
+    </div>
+    <div class="rm">
+      <h4>Week 4 — Full Launch</h4>
+      <div class="rm-item"><span class="rm-check">✓</span> All systems go live simultaneously</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Admissions team walkthrough & training</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Program-specific landing pages built</div>
+      <div class="rm-item"><span class="rm-check">✓</span> Analytics dashboard configured</div>
+      <div class="rm-item"><span class="rm-check">✓</span> 30-day post-launch support included</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const secs=document.querySelectorAll('[id]');
+  const jl=document.querySelectorAll('.jump-link');
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;jl.forEach(l=>{const active=l.getAttribute('href')==='#'+id;l.style.borderColor=active?'var(--blue-light)':'transparent';l.style.color=active?'var(--text)':'';});}});},{rootMargin:'-80px 0px -65% 0px'});
+  secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
